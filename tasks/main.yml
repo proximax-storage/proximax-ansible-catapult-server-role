@@ -1,4 +1,22 @@
 #------------------------------------------------
+# NOTE: ECR Login is not included in the ansible-catapult-server role
+# Get ECR login token. Run in Ansible host (localhost)
+#------------------------------------------------
+- name: Get AWS ECR login token
+  become: false
+  shell: "aws ecr get-login --no-include-email --region ap-southeast-1"
+  delegate_to: 127.0.0.1
+  run_once: true
+  register: docker_login_cmd
+
+#------------------------------------------------
+# ECR Docker login
+#------------------------------------------------
+- name: Login to Docker ECR using temporary token
+  shell: "{{ docker_login_cmd.stdout }}"
+
+
+#------------------------------------------------
 # Step 1: Create Catapult Server directories
 #------------------------------------------------
 - name: Create directory for catapult-server config resources
@@ -15,12 +33,17 @@
   - "{{ catapult_data_directory }}"
 
 #------------------------------------------------
-# Pull the Catapult-Server Docker image from a Docker registry
+# Pull the Docker images from a Docker registry
 #------------------------------------------------
 - name: "Docker pull Catapult Server image"
   docker_image:
     name: "{{ catapult_server_repository_name }}"
     tag: "{{ catapult_server_docker_tag }}"
+
+- name: "Docker pull Catapult REST image"
+  docker_image:
+    name: "{{ catapult_rest_repository_name }}"
+    tag: "{{ catapult_rest_docker_tag }}"
 
 #------------------------------------------------
 # Create scripts and configuration files from populated Jinja2 templates
@@ -38,6 +61,7 @@
   - config-logging.properties
   - config-messaging.properties
   - config-network.properties
+  - config-networkheight.properties
   - config-node.properties
   - config-pt.properties
   - config-task.properties
@@ -71,8 +95,26 @@
     recurse: yes
     mode: 0744
   with_items:
-  - "{{ mongodb_data_directory }}"
   - "{{ catapult_rest_user_config }}"
+  - "{{ mongodb_data_directory }}"
+  - "{{ catapult_scripts_directory }}"
+  - "{{ catapult_scripts_directory }}/mongo"
+  when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api"
+
+- name: Catapult API Node - copy the mongodb scripts
+  copy:
+    src: "{{ item }}"
+    dest: "{{ catapult_scripts_directory }}/{{ item }}"
+    owner: "{{ catapult_user }}"
+    group: "{{ catapult_group }}"
+    mode: 0644
+  with_items:
+  - "mongo/mongors.sh"
+  - "mongo/mongoNamespaceDbPrepare.js"
+  - "mongo/mongoMultisigDbPrepare.js"
+  - "mongo/mongoDbPrepare.js"
+  - "mongo/mongoDbDrop.js"
+
   when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api"
 
 - name: Catapult API Node - Docker compose file for Catapult Server API Node
