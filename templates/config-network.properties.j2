@@ -1,77 +1,89 @@
 {% set combined_net_config = default_net_config | combine(net_config, recursive=true) -%}
-[network]
+  [network]
 
-identifier = {{ combined_net_config['identifier'] }}
-publicKey = {{ combined_net_config['nemesis_signer_public_key'] }}
-generationHash = {{ combined_net_config['nemesis_generation_hash_public_key'] }}
+  identifier = {{ combined_net_config['identifier'] }}
+  publicKey = {{ combined_net_config['nemesis_signer_public_key'] }}
+  generationHash = {{ combined_net_config['nemesis_generation_hash_public_key'] }}
 
-[chain]
+  [chain]
 
-blockGenerationTargetTime = {{ combined_net_config['block_generation_target_time'] }}
-blockTimeSmoothingFactor = {{ combined_net_config['block_time_smoothing_factor'] }}
+  shouldEnableVerifiableState = {{ combined_net_config['should_enable_verifiable_state'] | lower }}
 
-importanceGrouping = {{ combined_net_config['importance_grouping'] }}
-maxRollbackBlocks = {{ combined_net_config['max_rollback_blocks'] }}
-maxDifficultyBlocks = {{ combined_net_config['max_difficulty_blocks'] }}
+  blockGenerationTargetTime = {{ combined_net_config['block_generation_target_time'] }}
+  blockTimeSmoothingFactor = {{ combined_net_config['block_time_smoothing_factor'] }}
 
-maxTransactionLifetime = {{ combined_net_config['max_transaction_lifetime'] }}
-maxBlockFutureTime = {{ combined_net_config['max_block_future_time'] }}
+  # REMOVED in PC-35
+  importanceGrouping = {{ combined_net_config['importance_grouping'] }}
 
-totalChainBalance = {{ combined_net_config['total_chain_balance'] }}
-minHarvesterBalance = {{ combined_net_config['min_harvester_balance'] }}
+  # ADDED in PC-35
+  # effectiveBalanceRange = combined_net_config['effective_balance_range']
 
-blockPruneInterval = {{ combined_net_config['block_prune_interval'] }}
-maxTransactionsPerBlock = {{ combined_net_config['max_transactions_per_block'] }}
+  maxRollbackBlocks = {{ combined_net_config['max_rollback_blocks'] }}
+  maxDifficultyBlocks = {{ combined_net_config['max_difficulty_blocks'] }}
+
+  maxTransactionLifetime = {{ combined_net_config['max_transaction_lifetime'] }}
+  maxBlockFutureTime = {{ combined_net_config['max_block_future_time'] }}
+
+  totalChainBalance = {{ combined_net_config['total_chain_balance'] }}
+  minHarvesterBalance = {{ combined_net_config['min_harvester_balance'] }}
+
+  blockPruneInterval = {{ combined_net_config['block_prune_interval'] }}
+  maxTransactionsPerBlock = {{ combined_net_config['max_transactions_per_block'] }}
 
 
-[plugin:catapult.plugins.aggregate]
+  [plugin:catapult.plugins.aggregate]
 
-maxTransactionsPerAggregate = {{ combined_net_config['max_transactions_per_aggregate'] }}
-maxCosignaturesPerAggregate = {{ combined_net_config['max_cosignatures_per_aggregate'] }}
+  maxTransactionsPerAggregate = {{ combined_net_config['max_transactions_per_aggregate'] }}
+  maxCosignaturesPerAggregate = {{ combined_net_config['max_cosignatures_per_aggregate'] }}
 
-# multisig plugin is expected to do more advanced cosignature checks
-enableStrictCosignatureCheck = {{ combined_net_config['enable_strict_cosignature_check'] | lower }}
-enableBondedAggregateSupport = {{ combined_net_config['enable_bonded_aggregate_support'] | lower }}
+  # multisig plugin is expected to do more advanced cosignature checks
+  enableStrictCosignatureCheck = {{ combined_net_config['enable_strict_cosignature_check'] | lower }}
+  enableBondedAggregateSupport = {{ combined_net_config['enable_bonded_aggregate_support'] | lower }}
 
-[plugin:catapult.plugins.multisig]
+  [plugin:catapult.plugins.lockhash]
 
-maxMultisigDepth = {{ combined_net_config['max_multisig_depth'] }}
-maxCosignersPerAccount = {{ combined_net_config['max_cosigners_per_account'] }}
-maxCosignedAccountsPerAccount = {{ combined_net_config['max_cosigned_accounts_per_account'] }}
+  lockedFundsPerAggregate = {{ combined_net_config['locked_funds_per_aggregate'] }}
+  maxHashLockDuration = {{ combined_net_config['max_hash_lock_duration'] }}
 
-[plugin:catapult.plugins.namespace]
+  [plugin:catapult.plugins.locksecret]
 
-maxNameSize = {{ combined_net_config['max_name_size'] }}
+  maxSecretLockDuration = {{ combined_net_config['max_Secret_lock_duration'] }}
+  minProofSize = {{ combined_net_config['min_proof_size'] }}
+  maxProofSize = {{ combined_net_config['max_proof_size'] }}
 
-# *approximate* days based on blockGenerationTargetTime
-maxNamespaceDuration = {{ combined_net_config['max_namespace_duration'] }}
-namespaceGracePeriodDuration = {{ combined_net_config['namespace_grace_period_duration'] }}
-reservedRootNamespaceNames = {{ combined_net_config['reserved_root_namespace_names'] }}
+  [plugin:catapult.plugins.multisig]
 
-namespaceRentalFeeSinkPublicKey = {{ combined_net_config['namespace_rental_fee_sink_public_key'] }}
-rootNamespaceRentalFeePerBlock = {{ combined_net_config['root_namespace_rental_fee_per_block'] }}
-childNamespaceRentalFee = {{ combined_net_config['child_namespace_rental_fee'] }}
+  maxMultisigDepth = {{ combined_net_config['max_multisig_depth'] }}
+  maxCosignersPerAccount = {{ combined_net_config['max_cosigners_per_account'] }}
+  maxCosignedAccountsPerAccount = {{ combined_net_config['max_cosigned_accounts_per_account'] }}
 
-maxChildNamespaces = {{ combined_net_config['max_child_namespaces'] }}
-maxMosaicsPerAccount = {{ combined_net_config['max_mosaics_per_account'] }}
+  [plugin:catapult.plugins.namespace]
 
-maxMosaicDuration = {{ combined_net_config['max_mosaic_duration'] }}
+  maxNameSize = {{ combined_net_config['max_name_size'] }}
 
-isMosaicLevyUpdateAllowed = {{ combined_net_config['is_mosaic_levy_update_allowed'] | lower }}
-maxMosaicDivisibility = {{ combined_net_config['max_mosaic_divisibility'] }}
-maxMosaicDivisibleUnits = {{ combined_net_config['max_mosaic_divisible_units'] }}
+  # *approximate* days based on blockGenerationTargetTime
+  namespaceGracePeriodDuration = {{ combined_net_config['namespace_grace_period_duration'] }}
+  reservedRootNamespaceNames = {{ combined_net_config['reserved_root_namespace_names'] }}
 
-mosaicRentalFeeSinkPublicKey = {{ combined_net_config['mosaic_rental_fee_sink_public_key'] }}
-mosaicRentalFee = {{ combined_net_config['mosaic_rental_fee'] }}
+  namespaceRentalFeeSinkPublicKey = {{ combined_net_config['namespace_rental_fee_sink_public_key'] }}
+  rootNamespaceRentalFeePerBlock = {{ combined_net_config['root_namespace_rental_fee_per_block'] }}
+  childNamespaceRentalFee = {{ combined_net_config['child_namespace_rental_fee'] }}
 
-[plugin:catapult.plugins.transfer]
+  maxChildNamespaces = {{ combined_net_config['max_child_namespaces'] }}
+  maxMosaicsPerAccount = {{ combined_net_config['max_mosaics_per_account'] }}
 
-maxMessageSize = {{ combined_net_config['max_message_size'] }}
+  isMosaicLevyUpdateAllowed = {{ combined_net_config['is_mosaic_levy_update_allowed'] | lower }}
+  maxMosaicDivisibility = {{ combined_net_config['max_mosaic_divisibility'] }}
+  maxMosaicDivisibleUnits = {{ combined_net_config['max_mosaic_divisible_units'] }}
 
-[plugin:catapult.plugins.lock]
+  mosaicRentalFeeSinkPublicKey = {{ combined_net_config['mosaic_rental_fee_sink_public_key'] }}
+  mosaicRentalFee = {{ combined_net_config['mosaic_rental_fee'] }}
 
-lockedFundsPerAggregate = {{ combined_net_config['locked_funds_per_aggregate'] }}
-maxHashLockDuration = {{ combined_net_config['max_hash_lock_duration'] }}
-maxSecretLockDuration = {{ combined_net_config['max_secret_lock_duration'] }}
-minProofSize = {{ combined_net_config['min_proof_size'] }}
-maxProofSize = {{ combined_net_config['max_proof_size'] }}
+  [plugin:catapult.plugins.property]
+
+  maxPropertyValues = {{ combined_net_config['max_property_values'] }}
+
+  [plugin:catapult.plugins.transfer]
+
+  maxMessageSize = {{ combined_net_config['max_message_size'] }}
+

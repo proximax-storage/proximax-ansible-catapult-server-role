@@ -40,6 +40,9 @@ shouldPrecomputeTransactionAddresses = {{ combined_node_config['should_precomput
 outgoingSecurityMode = {{ combined_node_config['outgoing_security_mode'] }}
 incomingSecurityModes = {{ combined_node_config['incoming_security_modes'] }}
 
+maxCacheDatabaseWriteBatchSize = {{ combined_node_config['max_cache_database_write_batch_size'] }}
+maxTrackedNodes = {{ combined_node_config['max_track_nodes'] }}
+
 [localnode]
 
 host = {{ combined_node_config['localnode_host'] }}
@@ -51,11 +54,15 @@ roles = {{ combined_node_config['localnode_roles'] }}
 
 maxConnections = {{ combined_node_config['outgoing_max_connections'] }}
 maxConnectionAge = {{ combined_node_config['outgoing_max_connection_age'] }}
+maxConnectionBanAge = {{ combined_node_config['outgoing_max_connection_ban_age'] }}
+numConsecutiveFailuresBeforeBanning = {{ combined_node_config['outgoing_num_consecutive_failures_before_banning'] }}
 
 [incoming_connections]
 
 maxConnections = {{ combined_node_config['incoming_max_connections'] }}
 maxConnectionAge = {{ combined_node_config['incoming_max_connection_age'] }}
+maxConnectionBanAge = {{ combined_node_config['incoming_max_connection_ban_age'] }}
+numConsecutiveFailuresBeforeBanning = {{ combined_node_config['incoming_num_consecutive_failures_before_banning'] }}
 backlogSize = {{ combined_node_config['incoming_backlog_size'] }}
 
 [extensions]
@@ -68,18 +75,10 @@ extension.mongo = {{ combined_node_config['extension_mongo'] | lower }}
 extension.partialtransaction = {{ combined_node_config['extension_partialtransaction'] | lower }}
 extension.zeromq = {{ combined_node_config['extension_zeromq'] | lower }}
 
-
 # p2p extensions
-{% if combined_node_config['localnode_roles'] == "Peer" %}
 extension.eventsource = {{ combined_node_config['extension_eventsource'] | lower }}
 extension.harvesting = {{ combined_node_config['extension_harvesting'] | lower }}
 extension.syncsource = {{ combined_node_config['extension_syncsource'] | lower }}
-{% else %}
-# extension.eventsource = {{ combined_node_config['extension_eventsource'] | lower }}
-# extension.harvesting = {{ combined_node_config['extension_harvesting'] | lower }}
-# extension.syncsource = {{ combined_node_config['extension_syncsource'] | lower }}
-{% endif %}
-
 
 # common extensions
 extension.diagnostics = {{ combined_node_config['extension_diagnostics'] | lower }}
