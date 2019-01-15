@@ -114,6 +114,9 @@
   - "mongo/mongoMultisigDbPrepare.js"
   - "mongo/mongoDbPrepare.js"
   - "mongo/mongoDbDrop.js"
+  - "mongo/ReputationDbPrepare.js"
+  - "mongo/ContractDbPrepare.js"
+  - "mongo/LockInfoDbPrepare.js"
 
   when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api"
 
