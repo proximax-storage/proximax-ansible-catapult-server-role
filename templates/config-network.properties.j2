@@ -40,7 +40,7 @@
   enableStrictCosignatureCheck = {{ combined_net_config['enable_strict_cosignature_check'] | lower }}
   enableBondedAggregateSupport = {{ combined_net_config['enable_bonded_aggregate_support'] | lower }}
 
-  [plugin:catapult.plugins]
+  [plugin:catapult.plugins.contract]
   minPercentageOfApproval = {{ combined_net_config['min_Percentage_Of_Approval'] | }}
   minPercentageOfRemoval = {{ combined_net_config['min_Percentage_Of_Removal'] | }}
 
