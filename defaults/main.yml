@@ -118,8 +118,7 @@ default_net_config:
   enable_strict_cosignature_check: false
   enable_bonded_aggregate_support: true
 
-  #[plugin:catapult.plugins.contract]
-
+  # [plugin:catapult.plugins.contract]
   min_Percentage_Of_Approval: 100
   min_Percentage_Of_Removal: 66
 
