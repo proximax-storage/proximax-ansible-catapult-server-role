@@ -6,6 +6,6 @@
 - src: https://github.com/mongrelion/ansible-role-docker.git
   name: ansible-role-docker
 
-- src: https://github.com/proximax-storage/ansible-catapult-server.git
-  name: ansible-catapult-server
+- src: https://github.com/proximax-storage/proximax-ansible-catapult-server-role.git
+  name: proximax-ansible-catapult-server-role
 

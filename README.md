@@ -1,4 +1,4 @@
-# proximax-ansible-catapult-server-role
+# Proximax Ansible Catapult Server Role
 
 Ansible Role for Catapult Server. This role will let users configure the properties files and pull the Catapult Server Docker image 
 from the specified Docker registry.
@@ -13,8 +13,8 @@ Specify the role in your `requirements.yml` file
 
 ```yaml
 # Get the role from GitHub
-- src: https://github.com/proximax-storage/ansible-catapult-server.git
-  name: ansible-catapult-server
+- src: https://github.com/proximax-storage/proximax-ansible-catapult-server-role.git
+  name: proximax-ansible-catapult-server-role
 ```
 
 Run `ansible-galaxy` install to download the role from Github
@@ -111,11 +111,33 @@ isTransferable = true
 isSupplyMutable = true
 isLevyMutable = false
 ```
-
-Now, generate the nemesis block.
+Update /opt/catapult/resource using ansible-playbook
 ```
-docker run -v /tmp/data:/data techbureau/catapult-tools:gcc-0.1.0.2 /bin/bash -c "/catapult/bin/catapult.tools.nemgen --nemesisProperties /data/block-properties-file.properties"
+ansible-playbook -i inventories/dev-proximax-catapult-server.yml -u ubuntu -b proximax-catapult-server-peer-node.yml  -v --private-key=~/.ssh/id_ed25519
+```
+Check /opt/catapult-config/resource directory to make sure that files are updated.
 
+Then docker run using proximax catapult download from aws ecr 
+```$xslt
+docker run -it -v /tmp/data/:/nemesis -v /opt/catapult-config/resources/:/resources --entrypoint=bash 249767383774.dkr.ecr.ap-southeast-1.amazonaws.com/proximax-catapult-server:develop
+```
+Once inside the docker container cd  to /catapult
+```
+cd /catapult
+```
+
+
+
+Now, generate the nemesis block. while inside the container
+```
+./bin/catapult.tools.nemgen --nemesisProperties  /nemesis/block-properties-file.properties
+```
+Logs should not have produce any errors.
+
+
+CTRL+D to logout of container.
+Then check /tmp/data
+```
 # check files
 tree /tmp/data
   /tmp/data
@@ -125,7 +147,14 @@ tree /tmp/data
   └── block-properties-file.properties
 ```
 
+Tar zip the data directory before sending to target host or directory.
+
+```
+sudo tar -R zcvf seed-date-projectname-date.tar.gz data/ 
+```
+
 The `data` folder should be copied to your `target host` server and defined in the role variable `catapult_data_directory` as shown in the next section.
+
 
 ## Basic Setup
 
@@ -139,11 +168,17 @@ The code below shows a basic configuration for this role. Do not forget to repla
   vars:    
     catapult_config_directory: /opt/catapult-config
     catapult_data_directory: /opt/catapult-config/data
+    catapult_scripts_directory: /opt/catapult-config/scripts
     catapult_user: ubuntu
     catapult_group: ubuntu
     
-    catapult_server_repository_name: techbureau/catapult-server
-    catapult_server_docker_tag: gcc-0.1.0.2
+    # proximax-catapult-server
+    catapult_server_repository_name: 249767383774.dkr.ecr.ap-southeast-1.amazonaws.com/proximax-catapult-server
+    catapult_server_docker_tag: release-v0.0.4
+    
+    # proximax-catapult-rest
+    catapult_rest_repository_name: 249767383774.dkr.ecr.ap-southeast-1.amazonaws.com/proximax-catapult-rest
+    catapult_rest_docker_tag: release-v0.0.2
     
     # config-network.properties
     net_config:
@@ -197,7 +232,7 @@ version: "3.6"
 services:
   catapult:
     # Downloads Catapult Server from specified Docker repo
-    image: techbureau/catapult-server:gcc-0.1.0.2
+    image: 249767383774.dkr.ecr.ap-southeast-1.amazonaws.com/proximax-catapult-server:release-v0.0.3
     ports:
       - 7902:7902
       - 7900:7900
