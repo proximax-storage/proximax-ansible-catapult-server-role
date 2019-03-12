@@ -1,4 +1,4 @@
 {% set combined_height_config = default_height_config | combine(height_config, recursive=true) -%}
-  [networkheight]
+[networkheight]
 
-  maxNodes = {{ combined_height_config['networkheight_max_nodes'] }}
+maxNodes = {{ combined_height_config['networkheight_max_nodes'] }}

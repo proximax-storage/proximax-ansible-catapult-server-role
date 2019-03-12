@@ -36,6 +36,7 @@ default_db_config:
   catapult_mongo_plugins_contract: true
   catapult_mongo_plugins_lockhash: true
   catapult_mongo_plugins_locksecret: true
+  catapult_mongo_plugins_mosaic: true
   catapult_mongo_plugins_multisig: true
   catapult_mongo_plugins_namespace: true
   catapult_mongo_plugins_property: true
@@ -83,11 +84,15 @@ net_config: {}
 # [network]
 default_net_config:
   identifier: mijin-test
-  #  nemesis_generation_hash_public_key: 0000000000000000000000000000000000000000000000000000000000000000
-  #  nemesis_signer_public_key: 0000000000000000000000000000000000000000000000000000000000000000
+#  nemesis_generation_hash_public_key: 0000000000000000000000000000000000000000000000000000000000000000
+#  nemesis_signer_public_key: 0000000000000000000000000000000000000000000000000000000000000000
 
   # [chain]
   should_enable_verifiable_state: true
+
+  should_enable_verifiable_receipts: true
+  # currency_mosaic_id: 0x0DC6'7FBE'1CAD'29E3 - this should be set per environment
+  # harvesting_mosaic_id: 0x0DC6'7FBE'1CAD'29E3 - this should be set per environment
 
   block_generation_target_time: 15s
   block_time_smoothing_factor: 3000
@@ -105,10 +110,16 @@ default_net_config:
 
   max_transaction_lifetime: 24h
   max_block_future_time: 10s
-  total_chain_balance: 8'999'999'998'000'000
+
+  # total_chain_balance: 8'999'999'998'000'000 - removed COW update
+  total_chain_importance: 8'999'999'998'000'000
+
   min_harvester_balance: 1'000'000'000'000
   block_prune_interval: 360
   max_transactions_per_block: 200'000
+
+  # [plugin:catapult.plugins.accountlink]
+  dummy: to trigger plugin load
 
   # [plugin:catapult.plugins.aggregate]
   max_transactions_per_aggregate: 1'000
@@ -130,35 +141,35 @@ default_net_config:
   # [plugin:catapult.plugins.locksecret]
 
   max_Secret_lock_duration: 30d
-  min_proof_size: 10
+  min_proof_size: 1
   max_proof_size: 10000
+
+  # [plugin:catapult.plugins.mosaic]
+  max_mosaics_per_account: 10'000
+  max_mosaic_duration: 3650d
+  is_mosaic_levy_update_allowed: true
+  max_mosaic_divisibility: 6
+  max_mosaic_divisible_units: 9'000'000'000'000'000
+  # mosaic_rental_fee_sink_public_key: -- this should be set per environment
+  mosaic_rental_fee: 500'000'000
 
   # [plugin:catapult.plugins.multisig]
   max_multisig_depth: 3
   max_cosigners_per_account: 10
-  max_cosigned_accounts_per_account: 5
+  max_cosigned_accounts_per_account: 1048576
 
   # [plugin:catapult.plugins.namespace]
   max_name_size: 64
-  # max_namespace_duration: 365d - REMOVED PC-35
+
+  max_namespace_duration: 365d
   namespace_grace_period_duration: 0d
   reserved_root_namespace_names: xem, nem, user, account, org, com, biz, net, edu, mil, gov, info
 
   # default mijin-test properties
-  #  namespace_rental_fee_sink_public_key: 0000000000000000000000000000000000000000000000000000000000000000
+#  namespace_rental_fee_sink_public_key: 0000000000000000000000000000000000000000000000000000000000000000
   root_namespace_rental_fee_per_block: 100'000
   child_namespace_rental_fee: 10'000'000
   max_child_namespaces: 500
-  max_mosaics_per_account: 10'000
-  # max_mosaic_duration: 3650d - REMOVED PC-35
-  is_mosaic_levy_update_allowed: true
-  max_mosaic_divisibility: 6
-  max_mosaic_divisible_units: 9'000'000'000'000'000
-
-  # default mijin-test properties
-  #  mosaic_rental_fee_sink_public_key: 0000000000000000000000000000000000000000000000000000000000000000
-  mosaic_rental_fee: 50'000'000
-
 
   # [plugin:catapult.plugins.property]
 
@@ -193,6 +204,8 @@ default_node_config:
   short_lived_cache_block_duration: 100m
   short_lived_cache_prune_interval: 90s
   short_lived_cache_max_size: 10'000'000
+  min_fee_multiplier: 0
+  transaction_selection_strategy: oldest
   unconfirmed_transactions_cache_max_response_size: 20MB
   unconfirmed_transactions_cache_max_size: 1'000'000
   connect_timeout: 10s
@@ -251,6 +264,7 @@ default_node_config:
   extension_networkheight: true
   extension_nodediscovery: true
   extension_packetserver: true
+  extension_pluginhandlers: true
   extension_sync: true
   extension_timesync: true
   extension_transactionsink: true
@@ -347,7 +361,7 @@ default_timesync_config:
 #------------------------------------
 user_config: {}
 default_user_config:
-  #  node_boot_private_key: 0000000000000000000000000000000000000000000000000000000000000000
+#  node_boot_private_key: 0000000000000000000000000000000000000000000000000000000000000000
   data_directory: /data
   plugins_directory:
 
