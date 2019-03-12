@@ -18,6 +18,8 @@ shortLivedCacheBlockDuration = {{ combined_node_config['short_lived_cache_block_
 shortLivedCachePruneInterval = {{ combined_node_config['short_lived_cache_prune_interval'] }}
 shortLivedCacheMaxSize = {{ combined_node_config['short_lived_cache_max_size'] }}
 
+minFeeMultiplier = {{ combined_node_config['min_fee_multiplier'] }}
+transactionSelectionStrategy = {{ combined_node_config['transaction_selection_strategy'] }}
 unconfirmedTransactionsCacheMaxResponseSize = {{ combined_node_config['unconfirmed_transactions_cache_max_response_size'] }}
 unconfirmedTransactionsCacheMaxSize = {{ combined_node_config['unconfirmed_transactions_cache_max_size'] }}
 
@@ -87,6 +89,7 @@ extension.hashcache = {{ combined_node_config['extension_hashcache'] | lower }}
 extension.networkheight = {{ combined_node_config['extension_networkheight'] | lower }}
 extension.nodediscovery = {{ combined_node_config['extension_nodediscovery'] | lower }}
 extension.packetserver = {{ combined_node_config['extension_packetserver'] | lower }}
+extension.pluginhandlers = {{ combined_node_config['extension_pluginhandlers'] | lower }}
 extension.sync = {{ combined_node_config['extension_sync'] | lower }}
 extension.timesync = {{ combined_node_config['extension_timesync'] | lower }}
 extension.transactionsink = {{ combined_node_config['extension_transactionsink'] | lower }}

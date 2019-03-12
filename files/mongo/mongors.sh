@@ -12,8 +12,10 @@ do
 done
 
 echo " [+] Preparing db"
+cd /userconfig
 mongo db/catapult < mongoDbPrepare.js
 echo " [.] (exit code: $?)"
+cd -
 
 echo " [+] db prepared, checking account indexes"
 mongo --eval 'db.accounts.getIndexes()' db/catapult
