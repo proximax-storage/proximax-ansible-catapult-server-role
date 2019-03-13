@@ -1,21 +1,4 @@
 #------------------------------------------------
-# NOTE: ECR Login is not included in the ansible-catapult-server role
-# Get ECR login token. Run in Ansible host (localhost)
-#------------------------------------------------
-- name: Get AWS ECR login token - local_action
-  become: false
-  shell: "aws ecr get-login --no-include-email --region ap-southeast-1"
-  delegate_to: 127.0.0.1
-  run_once: true
-  register: docker_login_cmd
-
-#------------------------------------------------
-# ECR Docker login
-#------------------------------------------------
-- name: Login to Docker ECR using temporary token
-  shell: "{{ docker_login_cmd.stdout }}"
-
-#------------------------------------------------
 # Step 1: Create Catapult Server directories
 #------------------------------------------------
 - name: Create directory for catapult-server config resources
