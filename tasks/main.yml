@@ -2,7 +2,7 @@
 # NOTE: ECR Login is not included in the ansible-catapult-server role
 # Get ECR login token. Run in Ansible host (localhost)
 #------------------------------------------------
-- name: Get AWS ECR login token
+- name: Get AWS ECR login token - local_action
   become: false
   shell: "aws ecr get-login --no-include-email --region ap-southeast-1"
   delegate_to: 127.0.0.1
@@ -14,7 +14,6 @@
 #------------------------------------------------
 - name: Login to Docker ECR using temporary token
   shell: "{{ docker_login_cmd.stdout }}"
-
 
 #------------------------------------------------
 # Step 1: Create Catapult Server directories
@@ -114,9 +113,10 @@
   - "mongo/mongoMultisigDbPrepare.js"
   - "mongo/mongoDbPrepare.js"
   - "mongo/mongoDbDrop.js"
-  - "mongo/ReputationDbPrepare.js"
-  - "mongo/ContractDbPrepare.js"
-  - "mongo/LockInfoDbPrepare.js"
+  - "mongo/mongoReputationDbPrepare.js"
+  - "mongo/mongoContractDbPrepare.js"
+  - "mongo/mongoLockInfoDbPrepare.js"
+  - "mongo/mongoAccountPropertiesDbPrepare.js"
 
   when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api"
 

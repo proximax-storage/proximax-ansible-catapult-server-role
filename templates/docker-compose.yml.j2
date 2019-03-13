@@ -11,4 +11,4 @@ services:
       - {{ catapult_config_directory }}:/catapultconfig
       - {{ catapult_data_directory }}:/data:rw
     restart: always
-    command: sh -c "/catapult/bin/catapult.server /catapultconfig"
+    # command: sh -c "/catapult/bin/catapult.server /catapultconfig"
