@@ -34,4 +34,5 @@ https://nemspfs.atlassian.net/wiki/spaces/CD/pages/165085193/Generating+the+NEM+
 ## Example Projects
 
 - https://github.com/proximax-storage/proximax-catapult-server-ansible
+- https://github.com/proximax-storage/csd-ansible
 
