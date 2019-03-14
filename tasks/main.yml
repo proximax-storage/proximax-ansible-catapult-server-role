@@ -1,7 +1,19 @@
 #------------------------------------------------
 # Step 1: Create Catapult Server directories
 #------------------------------------------------
-- name: Create directory for catapult-server config resources
+- name: Create Catapult block data directory
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ catapult_user }}"
+    group: "{{ catapult_group }}"
+    recurse: yes
+    mode: 0755
+  with_items:
+  - "{{ catapult_data_directory }}"
+
+- name: Create Catapult directories
   become: true
   file:
     path: "{{ item }}"
@@ -12,7 +24,6 @@
     mode: 0744
   with_items:
   - "{{ catapult_config_directory }}/resources"
-  - "{{ catapult_data_directory }}"
 
 #------------------------------------------------
 # Pull the Docker images from a Docker registry
