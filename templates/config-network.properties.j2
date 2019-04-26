@@ -64,6 +64,11 @@ maxSecretLockDuration = {{ combined_net_config['max_Secret_lock_duration'] }}
 minProofSize = {{ combined_net_config['min_proof_size'] }}
 maxProofSize = {{ combined_net_config['max_proof_size'] }}
 
+[plugin:catapult.plugins.metadata]
+maxFields = {{ combined_net_config['max_fields'] }}
+maxFieldKeySize = {{ combined_net_config['max_field_key_size'] }}
+maxFieldValueSize = {{ combined_net_config['max_field_value_size'] }}
+
 [plugin:catapult.plugins.mosaic]
 maxMosaicsPerAccount = {{ combined_net_config['max_mosaics_per_account'] }}
 maxMosaicDuration = {{ combined_net_config['max_mosaic_duration'] }}
