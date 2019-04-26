@@ -36,6 +36,7 @@ default_db_config:
   catapult_mongo_plugins_contract: true
   catapult_mongo_plugins_lockhash: true
   catapult_mongo_plugins_locksecret: true
+  catapult_mongo_plugins_metadata: true
   catapult_mongo_plugins_mosaic: true
   catapult_mongo_plugins_multisig: true
   catapult_mongo_plugins_namespace: true
@@ -134,15 +135,18 @@ default_net_config:
   min_Percentage_Of_Removal: 66
 
   # [plugin:catapult.plugins.lockhash]
-
   locked_funds_per_aggregate: 10'000'000
   max_hash_lock_duration: 2d
 
   # [plugin:catapult.plugins.locksecret]
-
   max_Secret_lock_duration: 30d
   min_proof_size: 1
   max_proof_size: 10000
+
+  # [plugin:catapult.plugins.metadata]
+  max_fields: 10
+  max_field_key_size: 128
+  max_field_value_size: 1024
 
   # [plugin:catapult.plugins.mosaic]
   max_mosaics_per_account: 10'000
