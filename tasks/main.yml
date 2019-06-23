@@ -52,8 +52,10 @@
     mode: u+r
   with_items:
   - config-database.properties
+  - config-extensions-server.properties
   - config-harvesting.properties
-  - config-logging.properties
+  - config-logging-server.properties
+  - config-inflation.properties
   - config-messaging.properties
   - config-network.properties
   - config-networkheight.properties
