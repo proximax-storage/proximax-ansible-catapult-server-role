@@ -28,6 +28,9 @@ maxDifficultyBlocks = {{ combined_net_config['max_difficulty_blocks'] }}
 maxTransactionLifetime = {{ combined_net_config['max_transaction_lifetime'] }}
 maxBlockFutureTime = {{ combined_net_config['max_block_future_time'] }}
 
+initialCurrencyAtomicUnits = {{ combined_net_config['initial_currency_atomic_units'] }}
+maxMosaicAtomicUnits = {{ combined_net_config['max_mosaic_atomic_units'] }}
+
 totalChainImportance = {{ combined_net_config['total_chain_importance'] }}
 
 minHarvesterBalance = {{ combined_net_config['min_harvester_balance'] }}
@@ -48,6 +51,8 @@ maxCosignaturesPerAggregate = {{ combined_net_config['max_cosignatures_per_aggre
 # multisig plugin is expected to do more advanced cosignature checks
 enableStrictCosignatureCheck = {{ combined_net_config['enable_strict_cosignature_check'] | lower }}
 enableBondedAggregateSupport = {{ combined_net_config['enable_bonded_aggregate_support'] | lower }}
+
+maxBondedTransactionLifetime = {{ combined_net_config['max_bonded_transaction_lifetime'] }}
 
 [plugin:catapult.plugins.contract]
 minPercentageOfApproval = {{ combined_net_config['min_Percentage_Of_Approval'] }}
@@ -72,9 +77,7 @@ maxFieldValueSize = {{ combined_net_config['max_field_value_size'] }}
 [plugin:catapult.plugins.mosaic]
 maxMosaicsPerAccount = {{ combined_net_config['max_mosaics_per_account'] }}
 maxMosaicDuration = {{ combined_net_config['max_mosaic_duration'] }}
-isMosaicLevyUpdateAllowed = {{ combined_net_config['is_mosaic_levy_update_allowed'] | lower }}
 maxMosaicDivisibility = {{ combined_net_config['max_mosaic_divisibility'] }}
-maxMosaicDivisibleUnits = {{ combined_net_config['max_mosaic_divisible_units'] }}
 mosaicRentalFeeSinkPublicKey = {{ combined_net_config['mosaic_rental_fee_sink_public_key'] }}
 mosaicRentalFee = {{ combined_net_config['mosaic_rental_fee'] }}
 

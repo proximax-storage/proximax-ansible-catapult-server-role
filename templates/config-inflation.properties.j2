@@ -1,0 +1,5 @@
+{% set combined_inflation_config = default_inflation_config | combine(inflation_config, recursive=true) -%}
+[inflation]
+
+starting-at-height-1 = {{ combined_inflation_config['starting-at-height-1'] | lower }}
+starting-at-height-10000 = {{ combined_inflation_config['starting-at-height-10000'] | lower }}
