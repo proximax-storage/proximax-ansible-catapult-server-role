@@ -1,4 +1,4 @@
-{% set combined_ext_server_config = default_ext_server_config | combine(default_ext_server_config, recursive=true) -%}
+{% set combined_ext_server_config = default_ext_server_config | combine(ext_server_config, recursive=true) -%}
 [extensions]
 
 # api extensions
