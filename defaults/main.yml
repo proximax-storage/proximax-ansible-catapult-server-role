@@ -82,7 +82,7 @@ default_ext_server_config:
 hv_config: {}
 default_hv_config:
   harvest_key:
-  beneficiary: 0000000000000000000000000000000000000000000000000000000000000000
+  beneficiary: '0000000000000000000000000000000000000000000000000000000000000000'
   is_auto_harvesting_enabled: false
   max_unlocked_accounts: 5
 
