@@ -37,8 +37,3 @@ services:
     - {{ catapult_rest_user_config }}:/userconfig/
     command: ash -c "npm start resources/rest.json /userconfig/rest.json"
 
-  block-explorer:
-    image: techbureau/catapult-block-explorer
-    command: ["python", "-m", "http.server", "8000"]
-    ports:
-    - "8000:8000"
