@@ -115,6 +115,10 @@
   - "mongo/mongoContractDbPrepare.js"
   - "mongo/mongoLockInfoDbPrepare.js"
   - "mongo/mongoAccountPropertiesDbPrepare.js"
+  - "mongo/mongoDeploy.bat"
+  - "mongo/mongoMosaicDbPrepare.js"
+  - "mongo/mongoDeploy.sh"
+  - "mongo/mongoMetadataDbPrepare.js"
 
   when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api"
 
