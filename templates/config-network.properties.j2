@@ -59,6 +59,11 @@ enableBondedAggregateSupport = {{ combined_net_config['enable_bonded_aggregate_s
 
 maxBondedTransactionLifetime = {{ combined_net_config['max_bonded_transaction_lifetime'] }}
 
+[plugin:catapult.plugins.config]
+
+maxBlockChainConfigSize = {{ combined_net_config['max_block_chain_config_size'] }}
+maxSupportedEntityVersionsSize = {{ combined_net_config['max_supported_entity_versions_size'] }}
+
 [plugin:catapult.plugins.contract]
 minPercentageOfApproval = {{ combined_net_config['min_Percentage_Of_Approval'] }}
 minPercentageOfRemoval = {{ combined_net_config['min_Percentage_Of_Removal'] }}
@@ -114,3 +119,7 @@ maxPropertyValues = {{ combined_net_config['max_property_values'] }}
 [plugin:catapult.plugins.transfer]
 
 maxMessageSize = {{ combined_net_config['max_message_size'] }}
+
+[plugin:catapult.plugins.upgrade]
+
+minUpgradePeriod = {{ combined_net_config['min_upgrade_period'] }}

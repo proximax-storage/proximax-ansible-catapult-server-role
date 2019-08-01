@@ -34,6 +34,7 @@ default_db_config:
   max_writer_threads: 8
   catapult_mongo_plugins_accountlink: true
   catapult_mongo_plugins_aggregate: true
+  catapult_mongo_plugins_config: true
   catapult_mongo_plugins_contract: true
   catapult_mongo_plugins_lockhash: true
   catapult_mongo_plugins_locksecret: true
@@ -43,6 +44,7 @@ default_db_config:
   catapult_mongo_plugins_namespace: true
   catapult_mongo_plugins_property: true
   catapult_mongo_plugins_transfer: true
+  catapult_mongo_plugins_upgrade: true
 
 #------------------------------------
 # config-extensions-server.properties.j2 - default_db_config['key']
@@ -182,6 +184,10 @@ default_net_config:
 
   max_bonded_transaction_lifetime: 48h
 
+  #[plugin:catapult.plugins.config]
+  max_block_chain_config_size: 1MB
+  max_supported_entity_versions_size: 1MB  
+
   # [plugin:catapult.plugins.contract]
   min_Percentage_Of_Approval: 100
   min_Percentage_Of_Removal: 66
@@ -232,6 +238,10 @@ default_net_config:
   # [plugin:catapult.plugins.transfer]
 
   max_message_size: 1024
+
+  # [plugin:catapult.plugins.upgrade]
+
+  min_upgrade_period: 360
 
 #------------------------------------
 # config-networkheight.properties.j2 - height_config['key']
