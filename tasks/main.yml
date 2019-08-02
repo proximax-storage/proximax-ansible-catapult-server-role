@@ -66,6 +66,7 @@
   - config-user.properties
   - peers-api.json
   - peers-p2p.json
+  - supported-entities.json
 
 #------------------------------------------------
 # If running Catapult-Server PEER Mode
@@ -119,6 +120,8 @@
   - "mongo/mongoMosaicDbPrepare.js"
   - "mongo/mongoDeploy.sh"
   - "mongo/mongoMetadataDbPrepare.js"
+  - "mongoCatapultConfigDbPrepare.js"
+  - "mongoCatapultUpgradeDbPrepare.js"
 
   when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api"
 

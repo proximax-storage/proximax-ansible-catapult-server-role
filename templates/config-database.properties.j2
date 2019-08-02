@@ -9,6 +9,7 @@ maxWriterThreads = {{ combined_db_config['max_writer_threads'] }}
 
 catapult.mongo.plugins.accountlink = {{ combined_db_config['catapult_mongo_plugins_accountlink'] | lower }}
 catapult.mongo.plugins.aggregate = {{ combined_db_config['catapult_mongo_plugins_aggregate'] | lower }}
+catapult.mongo.plugins.config = {{ combined_db_config['catapult_mongo_plugins_config'] | lower }}
 catapult.mongo.plugins.contract = {{ combined_db_config['catapult_mongo_plugins_contract'] | lower }}
 catapult.mongo.plugins.lockhash = {{ combined_db_config['catapult_mongo_plugins_lockhash'] | lower }}
 catapult.mongo.plugins.locksecret = {{ combined_db_config['catapult_mongo_plugins_locksecret'] | lower }}
@@ -18,3 +19,4 @@ catapult.mongo.plugins.multisig = {{ combined_db_config['catapult_mongo_plugins_
 catapult.mongo.plugins.namespace = {{ combined_db_config['catapult_mongo_plugins_namespace'] | lower }}
 catapult.mongo.plugins.property = {{ combined_db_config['catapult_mongo_plugins_property'] | lower }}
 catapult.mongo.plugins.transfer = {{ combined_db_config['catapult_mongo_plugins_transfer'] | lower }}
+catapult.mongo.plugins.upgrade = {{ combined_db_config['catapult_mongo_plugins_upgrade'] | lower }}
