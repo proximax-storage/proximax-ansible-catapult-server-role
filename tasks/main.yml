@@ -120,8 +120,8 @@
   - "mongo/mongoMosaicDbPrepare.js"
   - "mongo/mongoDeploy.sh"
   - "mongo/mongoMetadataDbPrepare.js"
-  - "mongoCatapultConfigDbPrepare.js"
-  - "mongoCatapultUpgradeDbPrepare.js"
+  - "mongo/mongoCatapultConfigDbPrepare.js"
+  - "mongo/mongoCatapultUpgradeDbPrepare.js"
 
   when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api"
 
