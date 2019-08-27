@@ -1,6 +1,11 @@
 #------------------------------------------------
 # Step 1: Create Catapult Server directories
 #------------------------------------------------
+- name: Check if SiriusBC block data directory exists
+  stat:
+    path: "{{ catapult_data_directory }}"
+  register: data_directory
+
 - name: Create Catapult block data directory
   become: true
   file:
@@ -10,8 +15,14 @@
     group: "{{ catapult_group }}"
     recurse: yes
     mode: 0755
+  when: not data_directory.stat.exists
   with_items:
   - "{{ catapult_data_directory }}"
+
+- name: Check if SiriusBC resources directory exists
+  stat:
+    path: "{{ catapult_config_directory }}/resources"
+  register: resources_directory
 
 - name: Create Catapult directories
   become: true
@@ -22,6 +33,7 @@
     group: "{{ catapult_group }}"
     recurse: yes
     mode: 0744
+  when: not resources_directory.stat.exists
   with_items:
   - "{{ catapult_config_directory }}/resources"
 
