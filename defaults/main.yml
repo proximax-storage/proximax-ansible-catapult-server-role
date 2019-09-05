@@ -11,6 +11,12 @@ catapult_server_repository_name: techbureau/catapult-server
 catapult_server_docker_tag: gcc-0.1.0.2
 
 #------------------------------------
+# Peer Node
+# docker-compose.yml.j2
+#------------------------------------
+catapult_ports: [7900, 7901, 7902]
+
+#------------------------------------
 # API Node
 # docker-compose-api-node.yml.j2
 #------------------------------------

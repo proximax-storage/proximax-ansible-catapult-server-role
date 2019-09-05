@@ -4,9 +4,9 @@ services:
     # Downloads Catapult Server from specified Docker repo
     image: {{ catapult_server_repository_name }}:{{ catapult_server_docker_tag }}
     ports:
-      - 7902:7902
-      - 7900:7900
-      - 7901:7901
+      - {{ catapult_ports[2] }}:7902
+      - {{ catapult_ports[0] }}:7900
+      - {{ catapult_ports[1] }}:7901
     volumes:
       - {{ catapult_config_directory }}:/catapultconfig
       - {{ catapult_data_directory }}:/data:rw

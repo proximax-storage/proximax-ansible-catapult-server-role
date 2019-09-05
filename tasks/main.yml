@@ -1,7 +1,12 @@
 #------------------------------------------------
-# Step 1: Create Catapult Server directories
+# Step 1: Create Sirius Chain Server directories
 #------------------------------------------------
-- name: Create Catapult block data directory
+- name: Check if Sirius Chain block data directory exists
+  stat:
+    path: "{{ catapult_data_directory }}"
+  register: data_directory
+
+- name: Create Sirius Chain block data directory
   become: true
   file:
     path: "{{ item }}"
@@ -10,10 +15,16 @@
     group: "{{ catapult_group }}"
     recurse: yes
     mode: 0755
+  when: not data_directory.stat.exists
   with_items:
   - "{{ catapult_data_directory }}"
 
-- name: Create Catapult directories
+- name: Check if Sirius Chain resources directory exists
+  stat:
+    path: "{{ catapult_config_directory }}/resources"
+  register: resources_directory
+
+- name: Create Sirius Chain directories
   become: true
   file:
     path: "{{ item }}"
@@ -22,28 +33,30 @@
     group: "{{ catapult_group }}"
     recurse: yes
     mode: 0744
+  when: not resources_directory.stat.exists
   with_items:
   - "{{ catapult_config_directory }}/resources"
 
 #------------------------------------------------
 # Pull the Docker images from a Docker registry
 #------------------------------------------------
-- name: "Docker pull Catapult Server image"
+- name: "Docker pull Sirius Chain Server image"
   docker_image:
     name: "{{ catapult_server_repository_name }}"
     tag: "{{ catapult_server_docker_tag }}"
     force: yes
 
-- name: "Docker pull Catapult REST image"
+- name: "Docker pull Sirius Chain REST image"
   docker_image:
     name: "{{ catapult_rest_repository_name }}"
     tag: "{{ catapult_rest_docker_tag }}"
     force: yes
+  when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api" #only download if node is Api
 
 #------------------------------------------------
 # Create scripts and configuration files from populated Jinja2 templates
 #------------------------------------------------
-- name: Generate Catapult Server Configuration Files
+- name: Generate Sirius Chain Server Configuration Files
   template:
     src: "{{ item }}.j2"
     dest: "{{ catapult_config_directory }}/resources/{{ item }}"
@@ -71,7 +84,7 @@
 #------------------------------------------------
 # If running Catapult-Server PEER Mode
 #------------------------------------------------
-- name: Docker compose file for running Catapult Server container
+- name: Docker compose file for running Sirius Chain Server container
   template:
     src: "docker-compose.yml.j2"
     dest: "{{ catapult_config_directory }}/docker-compose.yml"
@@ -83,7 +96,7 @@
 #------------------------------------------------
 # If running Catapult-Server API Mode
 #------------------------------------------------
-- name: Catapult API Node - create directory for catapult-server API Node
+- name: Sirius Chain API Node - create directory for catapult-server API Node
   become: true
   file:
     path: "{{ item }}"
@@ -99,7 +112,7 @@
   - "{{ catapult_scripts_directory }}/mongo"
   when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api"
 
-- name: Catapult API Node - copy the mongodb scripts
+- name: Sirius Chain API Node - copy the mongodb scripts
   copy:
     src: "{{ item }}"
     dest: "{{ catapult_scripts_directory }}/{{ item }}"
@@ -125,7 +138,7 @@
 
   when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api"
 
-- name: Catapult API Node - Docker compose file for Catapult Server API Node
+- name: Sirius Chain API Node - Docker compose file for Sirius Chain Server API Node
   template:
     src: "docker-compose-api-node.yml.j2"
     dest: "{{ catapult_config_directory }}/docker-compose.yml"
@@ -134,7 +147,7 @@
     mode: u+r
   when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api"
 
-- name: Catapult API Node - generate Catapult REST JSON configuration file
+- name: Sirius Chain API Node - generate Sirius Chain REST JSON configuration file
   template:
     src: "{{ item }}.j2"
     dest: "{{ catapult_rest_user_config }}/{{ item }}"
