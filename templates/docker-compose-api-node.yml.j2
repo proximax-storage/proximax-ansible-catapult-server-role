@@ -26,6 +26,7 @@ services:
     volumes:
       - {{ catapult_config_directory }}:/catapultconfig
       - {{ catapult_data_directory }}:/data:rw
+      - {{ catapult_logs_directory }}:/logs:rw
     restart: always
     # command: sh -c "/catapult/bin/catapult.server /catapultconfig"
 
