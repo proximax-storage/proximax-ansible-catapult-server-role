@@ -150,7 +150,7 @@ default_net_config:
   block_time_smoothing_factor: 3000
 
   greed_delta: 0.5
-  greed_exponent: 2
+  greed_exponent: 3.2
 
   # importance_grouping - ADDED in PC-35 / PC-44
   importance_grouping: 5760
@@ -172,7 +172,7 @@ default_net_config:
   # total_chain_balance: 8'999'999'998'000'000 - removed COW update
   total_chain_importance: 8'999'999'998'000'000
 
-  min_harvester_balance: 1'000'000'000'000
+  min_harvester_balance: 100'000'000'000
   harvest_beneficiary_percentage: 10
   block_prune_interval: 360
   max_transactions_per_block: 200'000
@@ -217,7 +217,7 @@ default_net_config:
   max_mosaic_duration: 3650d
   max_mosaic_divisibility: 6
   # mosaic_rental_fee_sink_public_key: -- this should be set per environment
-  mosaic_rental_fee: 500'000'000
+  mosaic_rental_fee: 10'000'000'000
 
   # [plugin:catapult.plugins.multisig]
   max_multisig_depth: 3
@@ -233,8 +233,8 @@ default_net_config:
 
   # default mijin-test properties
 #  namespace_rental_fee_sink_public_key: 0000000000000000000000000000000000000000000000000000000000000000
-  root_namespace_rental_fee_per_block: 100'000
-  child_namespace_rental_fee: 10'000'000
+  root_namespace_rental_fee_per_block: 10'000'000'000
+  child_namespace_rental_fee: 10'000'000'000
   max_child_namespaces: 500
 
   # [plugin:catapult.plugins.property]
