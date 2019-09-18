@@ -4,6 +4,7 @@
 catapult_config_directory: /opt/catapult-config
 catapult_data_directory: /opt/catapult-config/data
 catapult_scripts_directory: /opt/catapult-config/scripts
+catapult_logs_directory: /opt/catapult-config/logs
 catapult_user: ubuntu
 catapult_group: ubuntu
 
@@ -11,7 +12,6 @@ catapult_server_repository_name: techbureau/catapult-server
 catapult_server_docker_tag: gcc-0.1.0.2
 
 #------------------------------------
-# Peer Node
 # docker-compose.yml.j2
 #------------------------------------
 catapult_ports: [7900, 7901, 7902]
@@ -116,8 +116,8 @@ default_log_config:
   # [file]
   file_sink_type: Sync
   file_level: Debug
-  file_directory: logs
-  file_pattern: catapult_server_%4N.log
+  file_directory: /logs
+  file_pattern: /logs/catapult_server_%4N.log
   file_rotation_size: 25MB
   file_max_total_size: 2500MB
   file_min_free_space: 100MB
