@@ -1,17 +1,9 @@
 {% set combined_net_config = default_net_config | combine(net_config, recursive=true) -%}
 [network]
 
-identifier = {{ combined_net_config['identifier'] }}
 publicKey = {{ combined_net_config['nemesis_signer_public_key'] }}
-generationHash = {{ combined_net_config['nemesis_generation_hash_public_key'] }}
 
 [chain]
-
-shouldEnableVerifiableState = {{ combined_net_config['should_enable_verifiable_state'] | lower }}
-
-shouldEnableVerifiableReceipts = {{ combined_net_config['should_enable_verifiable_receipts'] | lower }}
-currencyMosaicId = {{ combined_net_config['currency_mosaic_id']}}
-harvestingMosaicId = {{ combined_net_config['harvesting_mosaic_id']}}
 
 blockGenerationTargetTime = {{ combined_net_config['block_generation_target_time'] }}
 blockTimeSmoothingFactor = {{ combined_net_config['block_time_smoothing_factor'] }}
@@ -19,25 +11,17 @@ blockTimeSmoothingFactor = {{ combined_net_config['block_time_smoothing_factor']
 greedDelta = {{ combined_net_config['greed_delta'] }}
 greedExponent = {{ combined_net_config['greed_exponent'] }}
 
-# REMOVED in PC-35
 importanceGrouping = {{ combined_net_config['importance_grouping'] }}
-
-# ADDED in PC-35
-# effectiveBalanceRange = combined_net_config['effective_balance_range']
-
 maxRollbackBlocks = {{ combined_net_config['max_rollback_blocks'] }}
 maxDifficultyBlocks = {{ combined_net_config['max_difficulty_blocks'] }}
 
 maxTransactionLifetime = {{ combined_net_config['max_transaction_lifetime'] }}
 maxBlockFutureTime = {{ combined_net_config['max_block_future_time'] }}
 
-initialCurrencyAtomicUnits = {{ combined_net_config['initial_currency_atomic_units'] }}
 maxMosaicAtomicUnits = {{ combined_net_config['max_mosaic_atomic_units'] }}
 
 totalChainImportance = {{ combined_net_config['total_chain_importance'] }}
-
 minHarvesterBalance = {{ combined_net_config['min_harvester_balance'] }}
-
 harvestBeneficiaryPercentage = {{ combined_net_config['harvest_beneficiary_percentage'] }}
 
 blockPruneInterval = {{ combined_net_config['block_prune_interval'] }}
@@ -46,7 +30,6 @@ maxTransactionsPerBlock = {{ combined_net_config['max_transactions_per_block'] }
 [plugin:catapult.plugins.accountlink]
 
 dummy = {{ combined_net_config['dummy'] }}
-
 
 [plugin:catapult.plugins.aggregate]
 
@@ -65,6 +48,7 @@ maxBlockChainConfigSize = {{ combined_net_config['max_block_chain_config_size'] 
 maxSupportedEntityVersionsSize = {{ combined_net_config['max_supported_entity_versions_size'] }}
 
 [plugin:catapult.plugins.contract]
+
 minPercentageOfApproval = {{ combined_net_config['min_Percentage_Of_Approval'] }}
 minPercentageOfRemoval = {{ combined_net_config['min_Percentage_Of_Removal'] }}
 
@@ -80,14 +64,17 @@ minProofSize = {{ combined_net_config['min_proof_size'] }}
 maxProofSize = {{ combined_net_config['max_proof_size'] }}
 
 [plugin:catapult.plugins.metadata]
+
 maxFields = {{ combined_net_config['max_fields'] }}
 maxFieldKeySize = {{ combined_net_config['max_field_key_size'] }}
 maxFieldValueSize = {{ combined_net_config['max_field_value_size'] }}
 
 [plugin:catapult.plugins.mosaic]
+
 maxMosaicsPerAccount = {{ combined_net_config['max_mosaics_per_account'] }}
 maxMosaicDuration = {{ combined_net_config['max_mosaic_duration'] }}
 maxMosaicDivisibility = {{ combined_net_config['max_mosaic_divisibility'] }}
+
 mosaicRentalFeeSinkPublicKey = {{ combined_net_config['mosaic_rental_fee_sink_public_key'] }}
 mosaicRentalFee = {{ combined_net_config['mosaic_rental_fee'] }}
 
@@ -119,7 +106,15 @@ maxPropertyValues = {{ combined_net_config['max_property_values'] }}
 [plugin:catapult.plugins.transfer]
 
 maxMessageSize = {{ combined_net_config['max_message_size'] }}
+maxMosaicSize = {{ combined_net_config['max_mosaic_size'] }}
 
 [plugin:catapult.plugins.upgrade]
 
 minUpgradePeriod = {{ combined_net_config['min_upgrade_period'] }}
+
+[plugin:catapult.plugins.service]
+
+enabled = {{ combined_net_config['plugin_service_enabled'] }}
+
+minPercentageOfApproval = {{ combined_net_config['min_percentage_of_approval'] }}
+minPercentageOfRemoval = {{ combined_net_config['min_percentage_of_removal'] }}

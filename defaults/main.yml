@@ -51,6 +51,28 @@ default_db_config:
   catapult_mongo_plugins_property: true
   catapult_mongo_plugins_transfer: true
   catapult_mongo_plugins_upgrade: true
+  catapult_mongo_plugins_service: true
+
+#------------------------------------
+# config-extensions-broker.properties.j2 - default_ext_broker_config['key']
+#------------------------------------
+ext_config_broker_config: {}
+default_ext_config_broker_config:
+  extension_addressextraction: true
+  extension_mongo: true
+  extension_zeromq: true
+  extension_hashcache: true
+
+#------------------------------------
+# config-extensions-recovery.properties.j2 - default_ext_recovery_config['key']
+#------------------------------------
+ext_config_recovery_config: {}
+default_ext_config_recovery_config:
+  extension_addressextraction: false
+  extension_mongo: false
+  extension_zeromq: false
+  extension_hashcache: true
+
 
 #------------------------------------
 # config-extensions-server.properties.j2 - default_db_config['key']
@@ -73,7 +95,6 @@ default_ext_server_config:
 
   # common extensions
   extension_diagnostics: true
-  extension_filechain: true
   extension_hashcache: true
   extension_networkheight: true
   extension_nodediscovery: true
@@ -93,6 +114,26 @@ default_hv_config:
   beneficiary: '0000000000000000000000000000000000000000000000000000000000000000'
   is_auto_harvesting_enabled: false
   max_unlocked_accounts: 5
+
+#------------------------------------
+# config-immutable.properties.j2 - net_config['key']
+#------------------------------------
+immutable_config: {}
+default_immutable_config:
+# [immutable]
+  network_identifier: private-test
+#  nemesis_generation_hash_public_key: 0000000000000000000000000000000000000000000000000000000000000000
+
+  # [chain]
+  should_enable_verifiable_state: true
+  should_enable_verifiable_receipts: true
+
+  # currency_mosaic_id: 0x0DC6'7FBE'1CAD'29E3 - this should be set per environment
+  # harvesting_mosaic_id: 0x0DC6'7FBE'1CAD'29E3 - this should be set per environment
+  # storage_mosaic_id: 0xBFFB'42A1'9116'BDF6 - this should be set per environment
+  # streadming_mosaic_id: 0x77E4'90CC'9B2A'F6F6 - this should be set per environment
+
+  initial_currency_atomic_units: 8'999'999'998'000'000
 
 #------------------------------------
 # config-inflation.properties.j2 - inflation_config['key']
@@ -135,16 +176,8 @@ default_msg_config:
 net_config: {}
 # [network]
 default_net_config:
-  identifier: mijin-test
-#  nemesis_generation_hash_public_key: 0000000000000000000000000000000000000000000000000000000000000000
+
 #  nemesis_signer_public_key: 0000000000000000000000000000000000000000000000000000000000000000
-
-  # [chain]
-  should_enable_verifiable_state: true
-
-  should_enable_verifiable_receipts: true
-  # currency_mosaic_id: 0x0DC6'7FBE'1CAD'29E3 - this should be set per environment
-  # harvesting_mosaic_id: 0x0DC6'7FBE'1CAD'29E3 - this should be set per environment
 
   block_generation_target_time: 15s
   block_time_smoothing_factor: 3000
@@ -166,7 +199,6 @@ default_net_config:
   max_transaction_lifetime: 24h
   max_block_future_time: 10s
 
-  initial_currency_atomic_units: 8'999'999'998'000'000
   max_mosaic_atomic_units: 9'000'000'000'000'000
 
   # total_chain_balance: 8'999'999'998'000'000 - removed COW update
@@ -205,7 +237,7 @@ default_net_config:
   # [plugin:catapult.plugins.locksecret]
   max_Secret_lock_duration: 30d
   min_proof_size: 1
-  max_proof_size: 10000
+  max_proof_size: 1000
 
   # [plugin:catapult.plugins.metadata]
   max_fields: 10
@@ -229,7 +261,7 @@ default_net_config:
 
   max_namespace_duration: 365d
   namespace_grace_period_duration: 0d
-  reserved_root_namespace_names: xem, nem, user, account, org, com, biz, net, edu, mil, gov, info
+  reserved_root_namespace_names: xem, nem, user, account, org, com, biz, net, edu, mil, gov, info, prx, xpx, xarcade, xar, proximax, prc, storage
 
   # default mijin-test properties
 #  namespace_rental_fee_sink_public_key: 0000000000000000000000000000000000000000000000000000000000000000
@@ -244,10 +276,16 @@ default_net_config:
   # [plugin:catapult.plugins.transfer]
 
   max_message_size: 1024
+  max_mosaic_size: 512
 
   # [plugin:catapult.plugins.upgrade]
 
   min_upgrade_period: 360
+
+  # [plugin:catapult.plugins.service]
+  plugin_service_enabled: false
+  min_percentage_of_approval: 100
+  min_percentage_of_removal: 66
 
 #------------------------------------
 # config-networkheight.properties.j2 - height_config['key']

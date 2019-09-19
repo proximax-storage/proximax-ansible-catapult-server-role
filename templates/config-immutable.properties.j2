@@ -1,0 +1,15 @@
+{% set combined_immutable_config = default_immutable_config | combine(immutable_config, recursive=true) -%}
+[immutable]
+
+networkIdentifier = {{ combined_immutable_config['network_identifier'] }}
+generationHash = {{ combined_immutable_config['nemesis_generation_hash_public_key'] }}
+
+shouldEnableVerifiableState = {{ combined_immutable_config['should_enable_verifiable_state'] | lower }}
+shouldEnableVerifiableReceipts = {{ combined_immutable_config['should_enable_verifiable_receipts'] | lower }}
+
+currencyMosaicId = {{ combined_immutable_config['currency_mosaic_id']}}
+harvestingMosaicId = {{ combined_immutable_config['harvesting_mosaic_id']}}
+storageMosaicId = {{ combined_immutable_config['storage_mosaic_id']}}
+streamingMosaicId = {{ combined_immutable_config['streadming_mosaic_id']}}
+
+initialCurrencyAtomicUnits = {{ combined_immutable_config['initial_currency_atomic_units'] }}

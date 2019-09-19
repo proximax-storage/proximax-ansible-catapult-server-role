@@ -65,10 +65,15 @@
     mode: u+r
   with_items:
   - config-database.properties
+  - config-extensions-broker.properties
+  - config-extensions-recovery.properties
   - config-extensions-server.properties
   - config-harvesting.properties
-  - config-logging-server.properties
+  - config-immutable.properties
   - config-inflation.properties
+  - config-logging-broker.properties
+  - config-logging-recovery.properties
+  - config-logging-server.properties
   - config-messaging.properties
   - config-network.properties
   - config-networkheight.properties
