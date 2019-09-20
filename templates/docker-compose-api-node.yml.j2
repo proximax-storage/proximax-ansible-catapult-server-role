@@ -35,6 +35,6 @@ services:
     ports:
     - "3000:3000"
     volumes:
-    - {{ catapult_rest_user_config }}:/userconfig/
-    command: ash -c "npm start resources/rest.json /userconfig/rest.json"
+    - {{ catapult_rest_user_config }}/rest.json:/node_modules/catapult-api-rest/resources/rest.json
+    command: ash -c "yarn start"
 
