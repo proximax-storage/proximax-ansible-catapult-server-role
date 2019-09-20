@@ -114,7 +114,7 @@ minUpgradePeriod = {{ combined_net_config['min_upgrade_period'] }}
 
 [plugin:catapult.plugins.service]
 
-enabled = {{ combined_net_config['plugin_service_enabled'] }}
+enabled = {{ combined_net_config['plugin_service_enabled'] | lower  }}
 
 minPercentageOfApproval = {{ combined_net_config['min_percentage_of_approval'] }}
 minPercentageOfRemoval = {{ combined_net_config['min_percentage_of_removal'] }}
