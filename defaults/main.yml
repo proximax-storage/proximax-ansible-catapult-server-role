@@ -56,8 +56,8 @@ default_db_config:
 #------------------------------------
 # config-extensions-broker.properties.j2 - default_ext_broker_config['key']
 #------------------------------------
-ext_config_broker_config: {}
-default_ext_config_broker_config:
+ext_broker_config: {}
+default_ext_broker_config:
   extension_addressextraction: true
   extension_mongo: true
   extension_zeromq: true
@@ -66,8 +66,8 @@ default_ext_config_broker_config:
 #------------------------------------
 # config-extensions-recovery.properties.j2 - default_ext_recovery_config['key']
 #------------------------------------
-ext_config_recovery_config: {}
-default_ext_config_recovery_config:
+ext_recovery_config: {}
+default_ext_recovery_config:
   extension_addressextraction: false
   extension_mongo: false
   extension_zeromq: false
