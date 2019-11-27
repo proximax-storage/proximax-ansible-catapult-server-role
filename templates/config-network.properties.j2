@@ -52,6 +52,13 @@ maxSupportedEntityVersionsSize = {{ combined_net_config['max_supported_entity_ve
 minPercentageOfApproval = {{ combined_net_config['min_Percentage_Of_Approval'] }}
 minPercentageOfRemoval = {{ combined_net_config['min_Percentage_Of_Removal'] }}
 
+[plugin:catapult.plugins.exchange]
+
+enabled = {{ combined_net_config['plugin_exchange_enabled'] | lower }}
+
+maxOfferDuration = {{ combined_net_config['max_offer_duration'] }}
+longOfferKey = {{ combined_net_config['long_offer_key'] }}
+
 [plugin:catapult.plugins.lockhash]
 
 lockedFundsPerAggregate = {{ combined_net_config['locked_funds_per_aggregate'] }}
@@ -116,5 +123,4 @@ minUpgradePeriod = {{ combined_net_config['min_upgrade_period'] }}
 
 enabled = {{ combined_net_config['plugin_service_enabled'] | lower  }}
 
-minPercentageOfApproval = {{ combined_net_config['min_percentage_of_approval'] }}
-minPercentageOfRemoval = {{ combined_net_config['min_percentage_of_removal'] }}
+maxFilesOnDrive = {{ combined_net_config['max_files_on_drive'] }}
