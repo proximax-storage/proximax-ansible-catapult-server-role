@@ -43,6 +43,7 @@ default_db_config:
   catapult_mongo_plugins_aggregate: true
   catapult_mongo_plugins_config: true
   catapult_mongo_plugins_contract: true
+  catapult_mongo_plugins_exchange: true
   catapult_mongo_plugins_lockhash: true
   catapult_mongo_plugins_locksecret: true
   catapult_mongo_plugins_metadata: true
