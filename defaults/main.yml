@@ -295,6 +295,8 @@ default_net_config:
   # [plugin:catapult.plugins.service]
   plugin_service_enabled: false
   max_files_on_drive: 32768
+  verification_fee: 10
+  verification_duration: 240
 
 #------------------------------------
 # config-networkheight.properties.j2 - height_config['key']
@@ -459,33 +461,3 @@ default_user_config:
   data_directory: /data
   plugins_directory:
 
-#------------------------------------
-# peers-api.json.j2
-#------------------------------------
-#known_api_peers: [
-#{
-#  'public_key':'0000000000000000000000000000000000000000000000000000000000000000',
-#  'endpoint.host':'127.0.0.3',
-#  'endpoint.port':'7900',
-#  'metadata.name':'apinode',
-#  'metadata.roles':'Api'
-#}]
-
-#------------------------------------
-# peers-p2p.json.j2
-#------------------------------------
-#known_peers: [
-#{
-#  'public_key':'0000000000000000000000000000000000000000000000000000000000000000',
-#  'endpoint.host':'127.0.0.1',
-#  'endpoint.port':'7900',
-#  'metadata.name':'peernode1',
-#    'metadata.roles':'Peer'
-#},
-#{
-#  'public_key':'0000000000000000000000000000000000000000000000000000000000000000',
-#  'endpoint.host':'127.0.0.2',
-#  'endpoint.port':'7900',
-#  'metadata.name':'peernode2',
-#  'metadata.roles':'Peer'
-#}]
