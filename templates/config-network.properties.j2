@@ -47,6 +47,11 @@ maxBondedTransactionLifetime = {{ combined_net_config['max_bonded_transaction_li
 maxBlockChainConfigSize = {{ combined_net_config['max_block_chain_config_size'] }}
 maxSupportedEntityVersionsSize = {{ combined_net_config['max_supported_entity_versions_size'] }}
 
+[plugin:catapult.plugins.contract]
+
+minPercentageOfApproval = {{ combined_net_config['min_Percentage_Of_Approval'] }}
+minPercentageOfRemoval = {{ combined_net_config['min_Percentage_Of_Removal'] }}
+
 [plugin:catapult.plugins.exchange]
 
 enabled = {{ combined_net_config['plugin_exchange_enabled'] | lower }}
