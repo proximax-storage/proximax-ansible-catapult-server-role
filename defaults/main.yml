@@ -297,6 +297,8 @@ default_net_config:
   max_files_on_drive: 32768
   verification_fee: 10
   verification_duration: 240
+  download_duration: 40320
+  download_cache_enabled: true
 
 #------------------------------------
 # config-networkheight.properties.j2 - height_config['key']
