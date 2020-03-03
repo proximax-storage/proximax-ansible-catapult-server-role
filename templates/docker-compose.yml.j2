@@ -8,8 +8,14 @@ services:
       - {{ catapult_ports[0] }}:7900
       - {{ catapult_ports[1] }}:7901
     volumes:
-      - {{ catapult_config_directory }}:/catapultconfig
+      - {{ catapult_config_directory }}:/chainconfig
       - {{ catapult_data_directory }}:/data:rw
       - {{ catapult_logs_directory }}:/logs:rw
-    restart: always
-    # command: sh -c "/catapult/bin/catapult.server /catapultconfig"
+    {% if loki_enabled %}logging:
+      driver: loki
+      options:
+        loki-url: "https://{{ loki_auth_username }}:{{ loki_auth_password}}@{{ loki_url}}"
+        loki-external-labels: '{{ loki_labels }}'{% endif %}
+        
+    restart: on-failure:3
+    entrypoint: /chainconfig/sc-p2p-entrypoint.sh
