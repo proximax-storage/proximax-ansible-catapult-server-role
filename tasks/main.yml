@@ -98,6 +98,15 @@
     mode: u+r
   when: node_config['localnode_roles'] is not defined or node_config['localnode_roles'] != "Api"
 
+- name: Copy entrypoint script
+  copy:
+    src: "scripts/sc-p2p-entrypoint.sh"
+    dest: "{{ catapult_config_directory }}/sc-p2p-entrypoint.sh"
+    owner: "{{ catapult_user }}"
+    group: "{{ catapult_group }}"
+    mode: u+x
+  when: node_config['localnode_roles'] is not defined or node_config['localnode_roles'] != "Api"
+
 #------------------------------------------------
 # If running Catapult-Server API Mode
 #------------------------------------------------
