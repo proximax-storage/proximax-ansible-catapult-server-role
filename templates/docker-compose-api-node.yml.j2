@@ -24,11 +24,18 @@ services:
       - 7900:7900
       - 7901:7901
     volumes:
-      - {{ catapult_config_directory }}:/catapultconfig
+      - {{ catapult_config_directory }}:/chainconfig
       - {{ catapult_data_directory }}:/data:rw
       - {{ catapult_logs_directory }}:/logs:rw
-    restart: always
-    # command: sh -c "/catapult/bin/catapult.server /catapultconfig"
+    {% if loki_enabled %}logging:
+      driver: loki
+      options:
+        loki-url: "https://{{ loki_auth_username }}:{{ loki_auth_password}}@{{ loki_url}}"
+        loki-external-labels: '{{ loki_labels }}'{% endif %}
+        
+    restart: on-failure:3
+    entrypoint: /bin/bash
+    command: -c "rm -f /data/server.lock && /catapult/bin/sirius.bc /chainconfig"
 
   rest-gateway:
     image: {{ catapult_rest_repository_name }}:{{ catapult_rest_docker_tag }}

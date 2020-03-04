@@ -24,6 +24,15 @@ mongodb_data_directory: /opt/catapult-config/mongodata
 catapult_rest_user_config: /opt/catapult-config/restuserconfig
 
 #------------------------------------
+# docker logging driver
+#------------------------------------
+loki_enabled: false
+loki_auth_username: admin
+loki_auth_password: password
+loki_url: 127.0.0.1/loki/api/v1/push
+loki_labels: 'env=staging,node=localhost'
+
+#------------------------------------
 # API Node
 # rest.json.j2
 #------------------------------------
@@ -462,4 +471,3 @@ default_user_config:
 #  node_boot_private_key: 0000000000000000000000000000000000000000000000000000000000000000
   data_directory: /data
   plugins_directory:
-
