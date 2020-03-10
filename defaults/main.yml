@@ -283,10 +283,14 @@ default_net_config:
   reserved_root_namespace_names: xem, nem, user, account, org, com, biz, net, edu, mil, gov, info, prx, xpx, xarcade, xar, proximax, prc, storage
 
   # default mijin-test properties
-#  namespace_rental_fee_sink_public_key: 0000000000000000000000000000000000000000000000000000000000000000
+  #namespace_rental_fee_sink_public_key: 0000000000000000000000000000000000000000000000000000000000000000
   root_namespace_rental_fee_per_block: 10'000'000'000
   child_namespace_rental_fee: 10'000'000'000
   max_child_namespaces: 500
+  
+  # [plugin:catapult.plugins.operation]
+  plugin_operation_enabled: false
+  max_operation_duration: 2d
 
   # [plugin:catapult.plugins.property]
 
@@ -308,6 +312,9 @@ default_net_config:
   verification_duration: 240
   download_duration: 40320
   download_cache_enabled: true
+
+  # [plugin:catapult.plugins.supercontract]
+  plugin_supercontract_enabled: false
 
 #------------------------------------
 # config-networkheight.properties.j2 - height_config['key']

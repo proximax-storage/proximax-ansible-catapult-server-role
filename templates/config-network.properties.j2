@@ -106,6 +106,10 @@ childNamespaceRentalFee = {{ combined_net_config['child_namespace_rental_fee'] }
 
 maxChildNamespaces = {{ combined_net_config['max_child_namespaces'] }}
 
+[plugin:catapult.plugins.operation]
+enabled = {{ combined_net_config['plugin_operation_enabled'] | lower }}
+maxOperationDuration = {{ combined_net_config['max_operation_duration'] }}
+
 [plugin:catapult.plugins.property]
 
 maxPropertyValues = {{ combined_net_config['max_property_values'] }}
@@ -129,3 +133,6 @@ verificationDuration = {{ combined_net_config['verification_duration'] }}
 downloadDuration = {{ combined_net_config['download_duration'] }}
 
 downloadCacheEnabled = {{ combined_net_config['download_cache_enabled'] | lower }}
+
+[plugin:catapult.plugins.supercontract]
+enabled = {{ combined_net_config['plugin_supercontract_enabled'] | lower }}
