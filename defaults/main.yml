@@ -63,6 +63,8 @@ default_db_config:
   catapult_mongo_plugins_transfer: true
   catapult_mongo_plugins_upgrade: true
   catapult_mongo_plugins_service: true
+  catapult_mongo_plugins_operation: true
+  catapult_mongo_plugins_supercontract: true
 
 #------------------------------------
 # config-extensions-broker.properties.j2 - default_ext_broker_config['key']
