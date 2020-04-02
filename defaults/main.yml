@@ -276,6 +276,7 @@ default_net_config:
   max_multisig_depth: 3
   max_cosigners_per_account: 10
   max_cosigned_accounts_per_account: 1048576
+  new_cosigners_must_approve: true
 
   # [plugin:catapult.plugins.namespace]
   max_name_size: 64
@@ -317,6 +318,7 @@ default_net_config:
 
   # [plugin:catapult.plugins.supercontract]
   plugin_supercontract_enabled: false
+  max_super_contract_on_drive: 10
 
 #------------------------------------
 # config-networkheight.properties.j2 - height_config['key']
