@@ -90,7 +90,7 @@ mosaicRentalFee = {{ combined_net_config['mosaic_rental_fee'] }}
 maxMultisigDepth = {{ combined_net_config['max_multisig_depth'] }}
 maxCosignersPerAccount = {{ combined_net_config['max_cosigners_per_account'] }}
 maxCosignedAccountsPerAccount = {{ combined_net_config['max_cosigned_accounts_per_account'] }}
-newCosignersMustApprove = {{ combined_net_config['new_cosigners_must_approve'] || lower}}
+newCosignersMustApprove = {{ combined_net_config['new_cosigners_must_approve'] | lower }}
 
 [plugin:catapult.plugins.namespace]
 
