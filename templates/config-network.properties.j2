@@ -137,4 +137,4 @@ downloadCacheEnabled = {{ combined_net_config['download_cache_enabled'] | lower 
 
 [plugin:catapult.plugins.supercontract]
 enabled = {{ combined_net_config['plugin_supercontract_enabled'] | lower }}
-maxSuperContractsOnDrive = {{ max_super_contract_on_drive }}
+maxSuperContractsOnDrive = {{ combined_net_config['max_super_contract_on_drive'] }}
