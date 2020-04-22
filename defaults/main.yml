@@ -482,3 +482,6 @@ default_user_config:
 #  node_boot_private_key: 0000000000000000000000000000000000000000000000000000000000000000
   data_directory: /data
   plugins_directory:
+
+# entrypoint script
+sirius_binary_path: /catapult/bin

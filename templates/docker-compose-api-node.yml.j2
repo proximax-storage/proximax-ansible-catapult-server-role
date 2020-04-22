@@ -35,7 +35,7 @@ services:
         
     restart: on-failure:3
     entrypoint: /bin/bash
-    command: -c "rm -f /data/server.lock && /catapult/bin/sirius.bc /chainconfig"
+    command: -c "rm -f /data/server.lock && {{ sirius_binary_path }}/sirius.bc /chainconfig"
 
   rest-gateway:
     image: {{ catapult_rest_repository_name }}:{{ catapult_rest_docker_tag }}
