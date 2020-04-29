@@ -24,10 +24,12 @@ services:
       - 7900:7900
       - 7901:7901
     volumes:
-      - {{ catapult_config_directory }}:/catapultconfig
+      - {{ catapult_config_directory }}:/chainconfig
       - {{ catapult_data_directory }}:/data:rw
       - {{ catapult_logs_directory }}:/logs:rw
     restart: always
+    entrypoint: /bin/bash
+    command: -c "rm -f /data/server.lock && {{ sirius_binary_path }}/sirius.bc /chainconfig"
     # command: sh -c "/catapult/bin/catapult.server /catapultconfig"
 
   rest-gateway:
