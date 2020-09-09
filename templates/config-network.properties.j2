@@ -22,7 +22,7 @@ maxMosaicAtomicUnits = {{ combined_net_config['max_mosaic_atomic_units'] }}
 
 totalChainImportance = {{ combined_net_config['total_chain_importance'] }}
 minHarvesterBalance = {{ combined_net_config['min_harvester_balance'] }}
-enableDeadlineValidation = {{ combined_net_config['enable_deadline_validation'] }}
+enableDeadlineValidation = {{ combined_net_config['enable_deadline_validation'] | lower }}
 
 harvestBeneficiaryPercentage = {{ combined_net_config['harvest_beneficiary_percentage'] }}
 
@@ -43,7 +43,7 @@ enableStrictCosignatureCheck = {{ combined_net_config['enable_strict_cosignature
 enableBondedAggregateSupport = {{ combined_net_config['enable_bonded_aggregate_support'] | lower }}
 
 maxBondedTransactionLifetime = {{ combined_net_config['max_bonded_transaction_lifetime'] }}
-strictSigner = {{ combined_net_config['strict_signer'] }}
+strictSigner = {{ combined_net_config['strict_signer'] | lower }}
 
 [plugin:catapult.plugins.config]
 
