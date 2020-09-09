@@ -221,6 +221,7 @@ default_net_config:
   total_chain_importance: 8'999'999'998'000'000
 
   min_harvester_balance: 100'000'000'000
+  enable_deadline_validation: true
   harvest_beneficiary_percentage: 10
   block_prune_interval: 360
   max_transactions_per_block: 200'000
@@ -237,6 +238,7 @@ default_net_config:
   enable_bonded_aggregate_support: true
 
   max_bonded_transaction_lifetime: 48h
+  strict_signer: true
 
   #[plugin:catapult.plugins.config]
   max_block_chain_config_size: 1MB
