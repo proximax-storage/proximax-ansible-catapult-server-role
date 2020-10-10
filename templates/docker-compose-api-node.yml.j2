@@ -1,13 +1,13 @@
 version: "3.6"
 services:
   db:
-    image: mongo:4.2.0-bionic
+    image: mongo:4.4-bionic
     command: bash -c "mongod --dbpath=/dbdata --bind_ip=db"
     volumes:
     - {{ mongodb_data_directory }}:/dbdata:rw
 
   init-db:
-    image: mongo:4.2.0-bionic
+    image: mongo:4.4-bionic
     command:  bash -c "/bin/bash /userconfig/mongors.sh"
     volumes:
     - {{ mongodb_data_directory }}:/dbdata:rw
