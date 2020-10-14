@@ -22,6 +22,7 @@ catapult_ports: [7900, 7901, 7902]
 #------------------------------------
 mongodb_data_directory: /opt/catapult-config/mongodata
 catapult_rest_user_config: /opt/catapult-config/restuserconfig
+mongodb_docker_image: "mongo:4.4-bionic"
 
 #------------------------------------
 # API Node
