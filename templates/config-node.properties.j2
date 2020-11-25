@@ -22,6 +22,7 @@ shortLivedCacheMaxSize = {{ combined_node_config['short_lived_cache_max_size'] }
 minFeeMultiplier = {{ combined_node_config['min_fee_multiplier'] }}
 feeInterest = {{ combined_node_config['fee_interest'] }}
 feeInterestDenominator = {{ combined_node_config['fee_interest_denominator'] }}
+rejectEmptyBlocks = {{ combined_node_config['reject_empty_blocks'] | lower }}
 transactionSelectionStrategy = {{ combined_node_config['transaction_selection_strategy'] }}
 unconfirmedTransactionsCacheMaxResponseSize = {{ combined_node_config['unconfirmed_transactions_cache_max_response_size'] }}
 unconfirmedTransactionsCacheMaxSize = {{ combined_node_config['unconfirmed_transactions_cache_max_size'] }}

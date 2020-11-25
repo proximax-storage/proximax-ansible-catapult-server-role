@@ -351,6 +351,7 @@ default_node_config:
   min_fee_multiplier: 0
   fee_interest: 1
   fee_interest_denominator: 1
+  reject_empty_blocks: false
   transaction_selection_strategy: oldest
   unconfirmed_transactions_cache_max_response_size: 20MB
   unconfirmed_transactions_cache_max_size: 1'000'000
