@@ -39,6 +39,8 @@ loki_labels: 'env=staging,node=localhost'
 #catapult_rest_client_private_key: 0000000000000000000000000000000000000000000000000000000000000000
 #catapult_api_node_public_key: 0000000000000000000000000000000000000000000000000000000000000000
 catapult_rest_cors: '*'
+throttling_burst: 500
+throttling_rate: 100
 
 #------------------------------------
 # config-database.properties.j2 - default_db_config['key']
