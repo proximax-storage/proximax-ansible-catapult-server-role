@@ -44,13 +44,15 @@
   docker_image:
     name: "{{ catapult_server_repository_name }}"
     tag: "{{ catapult_server_docker_tag }}"
-    force: yes
+    force_source: yes
+    source: pull
 
 - name: "Docker pull Sirius Chain REST image"
   docker_image:
     name: "{{ catapult_rest_repository_name }}"
     tag: "{{ catapult_rest_docker_tag }}"
-    force: yes
+    force_source: yes
+    source: pull
   when: node_config['localnode_roles'] is defined and node_config['localnode_roles'] == "Api" #only download if node is Api
 
 #------------------------------------------------
